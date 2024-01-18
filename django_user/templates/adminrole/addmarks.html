@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Marks{% endblock title %}
+{% block forgot %}  {% endblock %}
+{% block content %} 
+{% if request.user.is_authenticated %}
+{% if user.role == "Admin" %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+        div.scroll {
+            margin: 8px, 8px;
+            padding: 8px;
+            width:auto;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+    </style>
+
+
+ <div class="scroll">
+
+<table id="showmarks" class="table-bordered border-danger container-fluid mt-2" align="center" class="menu">
+       <tr border="1px" align="center" style="background-color:black; color:white;">
+                      <td>Email</td>
+                      <td>Roll Number</td>
+                      <td>Branch</td>
+                      <td>Semester</td>
+                      <td>Subject</td>
+                      <td>Subject Code</td>
+                      <td>Full Marks</td>
+                      <td>Obtain Marks</td>
+                      <td>Pratical FM</td>
+                      <td>Prac Obt Marks</td>
+                      <td>Total Marks</td>
+                      <td>Result</td>
+                      <td>CGPA</td>
+                      <td>Result Date</td>
+                      <td>Action</td>
+                    </tr>
+                      <tr border="2" align="center" style="background-color:white; margin: 20px; border-radius:black solid 20px;">  
+                        <form action="addmark" method="GET">
+                          {% csrf_token %}
+                        <td><input type="text" name="email"></td>
+                        <td><input type="text" name="rollno"></td>
+                        <td> <input type="text" name="branch"></td>
+                        <td> <input type="text" name="semester"></td>
+                        <td><input type="text" name="subject"></td>
+                        <td><input type="text" name="subjectcode"></td>
+                        <td> <input type="text" name="fullmark"></td>
+                        <td> <input type="text" name="obtainmark"></td>
+                        <td> <input type="text" name="pracfullmark"></td>
+                        <td> <input type="text" name="pracobtmark"></td>
+                        <td> <input type="text" name="totalmark"></td>
+                        <td> <input type="text" name="result"></td>
+                        <td> <input type="text" name="CGPA"></td>
+                        <td> <input type="date" name="resultdate"></td>
+                    <td><button class="btn btn-success btn-outline-warning">Add</button> </td>
+                   </form>
+                      </tr> 
+                      <p class="text-center h3 fw-bold mb-0 mx-0 mx-md-0 mt-0 pb-0" style="color:red;">Or</p>
+                <div class="d-flex flex-row align-items-center mb-0 p-1">
+                    <div class="form-outline flex-fill mb-1">
+                       <form action="uploadmarks" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <label class="form-label" for="form3Example1c" style="color:green;">Select File</label><label class="form-label" for="form3Example1c"  style="color:red;">*</label>
+                    <input type="file" name="myfile" required accept="marksupload_sample_format.xlsx" class="form-control" style="width: 80%;">     
+                    </div>&#160 &#160
+                    <div class="form-outline flex-fill mb-1">
+                      <input class="btn bg-danger rounded rounded-4 mb-1" style="color:white; margin-top:25px; margin-right:50px; font-size:15px;" type="submit" value="Upload">
+                    </div>&#160 &#160
+                    <div class="form-outline flex-fill mb-1">
+                      <a  style="color:green; font-size:15px;" href = "{% static 'sample_format_excel/marksupload_sample_format.xlsx' %}" download = "file_name"> Sample<i class="fa fa-download" aria-hidden="true"></i> </a>
+                    </div>
+                    </div>
+                    </form>
+                    <br> 
+                    </table>    
+                        </div> 
+{% else %}
+<h1> You Do Not Have permission to access this page</h1>
+{% endif %}
+ {% else %}
+ <h1> You are not logged in</h1>
+    {% endif %} 
+               {% endblock %}
+               {% block mainbody %} {% endblock %}
