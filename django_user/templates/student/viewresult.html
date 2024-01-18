@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Result View{% endblock title %}
+{% block forgot %}  {% endblock %}
+{% block content %} 
+{% if request.user.is_authenticated %}
+{% if user.role == "Student" %}
+<script type="text/javascript" src="{% static 'jquery.js' %}"></script>
+<div class="container align-item-center">
+	<br>
+  <form action='marksheet' method="POST" name="f1" onsubmit="return validation();">
+      {% csrf_token %}
+<select name="semester" class="custom-select custom-select-sm">
+	<option id="sel" selected></option>
+	{% for i in details %}
+  <script type="text/javascript">
+    var a="{{i.semester}}";
+    var rolls="{{i.rollno}}";
+  </script>
+  <option>{{i.semester}}</option>
+  {% endfor %}
+       <input type="hidden" name="email" value="{{user.email}}"><br><br>
+       <button id="demo" class="btn btn-success btn-outline-warning" style="color:black; font-size:20px;">Click to show Semester </button>
+        </form>
+</select>
+</div>
+
+<script type="text/javascript">
+    var c,
+    c=a;
+  if (a!="") 
+  {
+  document.getElementById("demo").innerHTML = "Show Result";
+  document.getElementById("sel").innerHTML = "Selcect Semester";
+  }
+</script>
+
+
+<script type="text/javascript">
+function validation() 
+  { 
+    var sem=document.f1.semester.value;
+
+     if(isNaN(sem))
+    {
+      alert("Please select Semester");
+      return false;
+    }
+}
+  </script>
+<style type="text/css">
+#myborder
+{
+border: solid 1px red;
+}
+
+.mytop
+{
+padding-left: 10%;
+padding-top: 270px; 
+}
+.mydown
+{
+padding-left: 10%;
+} 
+
+#data
+{
+margin: 20px;
+}
+
+#myborder2
+{
+border: solid 1px red;
+word-break: break-all;
+width:355px;
+}
+</style>
+<script type="text/javascript">
+</script>
+{% for i in marks %}
+<div id="data">
+<table background="{% static 'images/marksheetformat.jpg' %}" style="background-repeat:no-repeat;background-size:cover;" >
+<tr><td colspan="7" class="mytop">School LOGO</td></tr>
+{% for i in details2 %}
+<tr><td colspan="7" class="mydown">DOB:-{{i.dob|date:'d-M-Y'}}</td></tr>
+<tr><td colspan="7" class="mydown">FATHER'S NAME:- {{i.fathername}} {{i.fatherlastname}}</td></tr>
+{% endfor %}
+<tr><td colspan="7" class="mydown">Roll Number:-{{i.rollno}}</td></tr>
+<tr><td colspan="7" class="mydown">Branch:-{{i.branch}}</td></tr>
+<tr><td colspan="4" class="mydown">Semester:-{{i.semester}}</td>
+<td colspan="3" class="mydown">Status:-Regular</td></tr>
+<tr><td colspan="7" class="mydown">School:-{{i.school}}</td></tr>
+<tr><td class="myblankleft" rowspan="11">&#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160</td></tr>
+<tr>
+<td id="myborder" rowspan="2" align="center">CODE</td>
+<td id="myborder2" rowspan="2" align="center">Subject</td>
+<td id="myborder" colspan="4" align="center">MARKS OBTAINED</td>
+<td id="myborder" align="center" rowspan="2">&#160POSITIONAL&#160<br> GRADE</td>
+<td class="myblankright">&#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160</td>
+  </tr>
+<tr align="center">
+<td id="myborder">TH</td>
+<td id="myborder">&#160 PR &#160</td>
+<td id="myborder">&#160 TOTAL &#160</td>
+<td id="myborder" align="center">&#160TOTAL IN WORDS&#160</td>
+</tr>                  
+                        <tr align="center">  
+                        <td id="myborder">&#160{{i.subjectcode1}}&#160</td>
+                        <td id="myborde">{{i.subject1}}</td>
+                        <td id="myborder">0{{i.marks1}}</td>
+                        <td id="myborder">0{{i.prac1}}</td>
+                        <td id="myborder">0{{totaltp.t1}}</td>
+                        <td id="myborder">{{totaltp.word1}}</td>
+                        <td id="myborder"><span id="grade">{{grades.grade}}</span></td>
+                        </tr>
+                        <tr align="center">  
+                        <td id="myborder">{{i.subjectcode2}}</td>
+                        <td id="myborder">{{i.subject2}}</td>
+                        <td id="myborder">0{{i.marks2}}</td>
+                        <td id="myborder">0{{i.prac2}}</td>
+                        <td id="myborder">0{{totaltp.t2}}</td>
+                        <td id="myborder">{{totaltp.word2}}</td>
+                        <td id="myborder">{{grades.grade2}}</td>
+                        </tr>
+                        <tr align="center">  
+                        <td id="myborder">{{i.subjectcode3}}</td>
+                        <td id="myborder">{{i.subject2}}</td>
+                        <td id="myborder">0{{i.marks3}}</td>
+                        <td id="myborder">0{{i.prac3}}</td>
+                        <td id="myborder">0{{totaltp.t3}}</td>
+                        <td id="myborder">{{totaltp.word3}}</td>
+                        <td id="myborder">{{grades.grade3}}</td>
+                        </tr>
+                        <tr  align="center">  
+                        <td id="myborder">{{i.subjectcode4}}</td>
+                        <td id="myborder">{{i.subject4}}</td>
+                        <td id="myborder">0{{i.marks4}}</td>
+                        <td id="myborder">0{{i.prac4}}</td>
+                        <td id="myborder">0{{totaltp.t4}}</td>
+                        <td id="myborder">{{totaltp.word4}}</td>
+                        <td id="myborder">{{grades.grade4}}</td>
+                        </tr>
+                        <tr  align="center">  
+                        <td id="myborder">{{i.subjectcode5}}</td>
+                        <td id="myborder">{{i.subject5}}</td>
+                        <td id="myborder">0{{i.marks5}}</td>
+                        <td id="myborder">0{{i.prac5}}</td>
+                        <td id="myborder">0{{totaltp.t5}}</td>
+                        <td id="myborder">{{totaltp.word5}}</td>
+                        <td id="myborder">{{grades.grade5}}</td>
+                        </tr>
+                         <tr> <td> </td></tr>
+                        <tr><td> </td></tr>
+                        <tr>
+                          <td align="center" id="myborder">CGPA</td>
+                          <td align="left" id="myborder">&#160 &#160 &#160 {{totaltp.CGPA}}</td>
+                          <td  id="myborder" style="font-weight: bolder;" align="center">&#160 TOTAL &#160</td>
+                          <td colspan="2" align="center" id="myborder" style=" font-weight: bolder;">{{totaltp.subtotal}}</td>
+                          <td  align="center" id="myborder" style="font-weight: bolder;">RESULT</td>
+                          <td align="center" id="myborder" style="color:black; font-weight: bolder; color:red;">{{grades.result}}</td>
+                        </tr>
+              
+                        <tr><td colspan="9" style="padding-top:20px; padding-bottom:158px; padding-left:100px;">Result Date:- {{i.resultdate|date:'d-M-Y'}}</td></tr>
+                        </tr>
+                         </table> 
+                       </div>
+                       <a id="btn-Convert-Html2Image" class="btn btn-outline-danger m-3" href="#">Download</a>
+                    <input id="btn-Preview-Image" class="btn btn-outline-success m-3" type="button" value="Preview"/>
+                    <div class="m-3" id="previewImage"> </div>
+                    
+                    <br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://fbktnsetnet.000webhostapp.com/wp-content/uploads/2018/04/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $("#btn-Convert-Html2Image").hide();
+     $("#btn-Preview-Image").click(function(){
+      $("#btn-Convert-Html2Image").show();
+      $("#btn-Preview-Image").hide();
+     });
+    });
+  </script>
+
+<script>
+$(document).ready(function(){
+
+  
+var element = $("#data"); // global variable
+var getCanvas; // global variable
+ 
+    $("#btn-Preview-Image").on('click', function () {
+         html2canvas(element, {
+         onrendered: function (canvas) {
+                $("#previewImage").append(canvas);
+                getCanvas = canvas;
+             }
+         });
+    });
+
+  $("#btn-Convert-Html2Image").on('click', function () {
+    var imgageData = getCanvas.toDataURL("image/png");
+    // Now browser starts downloading it instead of just showing it
+    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    $("#btn-Convert-Html2Image").attr("download", "Marksheet_"+rolls+".jpeg").attr("href", newData);
+  });
+
+});
+</script>
+
+
+
+
+
+                    {% endfor %}             
+                      
+{% else %}
+<h1> You Do Not Have permission to access this page</h1>
+{% endif %}
+ {% else %}
+ <h1> You are not logged in</h1>
+    {% endif %} 
+{% endblock %}
+ {% block mainbody %} {% endblock %}

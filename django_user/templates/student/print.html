@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Result View{% endblock title %}
+{% block forgot %}  {% endblock %}
+{% block content %} 
+{% if request.user.is_authenticated %}
+{% if user.role == "Student" %}
+
+<style type="text/css">
+#myborder
+{
+border: solid 1px red;
+}
+
+.mytop
+{
+padding-left: 10%;
+padding-top: 10%; 
+}
+.mydown
+{
+padding-left: 10%;
+} 
+
+#data
+{
+margin: 20px;
+}
+
+#myborder2
+{
+border: solid 1px red;
+word-break: break-all;
+width:355px;
+}
+</style>
+<script type="text/javascript">
+</script>
+{% for i in marks %}
+<div id="data">
+<table background="{% static 'images/marksheetformat.jpg' %}" style="background-repeat:no-repeat;background-size:cover;" >
+<tr><td colspan="7" class="mytop">Name:- {{user.first_name}} {{user.last_name}}</td></tr>
+{% for i in details2 %}
+<tr><td colspan="7" class="mydown">DOB:-{{i.dob|date:'d-M-Y'}}</td></tr>
+<tr><td colspan="7" class="mydown">FATHER'S NAME:- {{i.fathername}} {{i.fatherlastname}}</td></tr>
+{% endfor %}
+<tr><td colspan="7" class="mydown">Roll Number:-{{i.rollno}}</td></tr>
+<tr><td colspan="7" class="mydown">Branch:-{{i.branch}}</td></tr>
+<tr><td colspan="4" class="mydown">Semester:-{{i.semester}}</td>
+<td colspan="3" class="mydown">Status:-Regular</td></tr>
+<tr><td colspan="7" class="mydown">School:-{{i.school}}</td></tr>
+<tr><td class="myblankleft" rowspan="11">&#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160</td></tr>
+<tr>
+<td id="myborder" rowspan="2" align="center">CODE</td>
+<td id="myborder2" rowspan="2" align="center">Subject</td>
+<td id="myborder" colspan="4" align="center">MARKS OBTAINED</td>
+<td id="myborder" align="center" rowspan="2">&#160POSITIONAL&#160<br> GRADE</td>
+<td class="myblankright">&#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160</td>
+  </tr>
+<tr align="center">
+<td id="myborder">TH</td>
+<td id="myborder">&#160 PR &#160</td>
+<td id="myborder">&#160 TOTAL &#160</td>
+<td id="myborder" align="center">&#160TOTAL IN WORDS&#160</td>
+</tr>                  
+                        <tr align="center">  
+                        <td id="myborder">&#160{{i.subjectcode1}}&#160</td>
+                        <td id="myborde">{{i.subject1}}</td>
+                        <td id="myborder">0{{i.marks1}}</td>
+                        <td id="myborder">0{{i.prac1}}</td>
+                        <td id="myborder">0{{totaltp.t1}}</td>
+                        <td id="myborder">{{totaltp.word1}}</td>
+                        <td id="myborder"><span id="grade">{{grades.grade}}</span></td>
+                        </tr>
+                        <tr align="center">  
+                        <td id="myborder">{{i.subjectcode2}}</td>
+                        <td id="myborder">{{i.subject2}}</td>
+                        <td id="myborder">0{{i.marks2}}</td>
+                        <td id="myborder">0{{i.prac2}}</td>
+                        <td id="myborder">0{{totaltp.t2}}</td>
+                        <td id="myborder">{{totaltp.word2}}</td>
+                        <td id="myborder">{{grades.grade2}}</td>
+                        </tr>
+                        <tr align="center">  
+                        <td id="myborder">{{i.subjectcode3}}</td>
+                        <td id="myborder">{{i.subject2}}</td>
+                        <td id="myborder">0{{i.marks3}}</td>
+                        <td id="myborder">0{{i.prac3}}</td>
+                        <td id="myborder">0{{totaltp.t3}}</td>
+                        <td id="myborder">{{totaltp.word3}}</td>
+                        <td id="myborder">{{grades.grade3}}</td>
+                        </tr>
+                        <tr  align="center">  
+                        <td id="myborder">{{i.subjectcode4}}</td>
+                        <td id="myborder">{{i.subject4}}</td>
+                        <td id="myborder">0{{i.marks4}}</td>
+                        <td id="myborder">0{{i.prac4}}</td>
+                        <td id="myborder">0{{totaltp.t4}}</td>
+                        <td id="myborder">{{totaltp.word4}}</td>
+                        <td id="myborder">{{grades.grade4}}</td>
+                        </tr>
+                        <tr  align="center">  
+                        <td id="myborder">{{i.subjectcode5}}</td>
+                        <td id="myborder">{{i.subject5}}</td>
+                        <td id="myborder">0{{i.marks5}}</td>
+                        <td id="myborder">0{{i.prac5}}</td>
+                        <td id="myborder">0{{totaltp.t5}}</td>
+                        <td id="myborder">{{totaltp.word5}}</td>
+                        <td id="myborder">{{grades.grade5}}</td>
+                        </tr>
+                         <tr> <td> </td></tr>
+                        <tr><td> </td></tr>
+                        <tr>
+                          <td align="center" id="myborder">CGPA</td>
+                          <td align="left" id="myborder">&#160 &#160 &#160 {{totaltp.CGPA}}</td>
+                          <td  id="myborder" style="font-weight: bolder;" align="center">&#160 TOTAL &#160</td>
+                          <td colspan="2" align="center" id="myborder" style=" font-weight: bolder;">{{totaltp.subtotal}}</td>
+                          <td  align="center" id="myborder" style="font-weight: bolder;">RESULT</td>
+                          <td align="center" id="myborder" style="color:black; font-weight: bolder; color:red;">{{grades.result}}</td>
+                        </tr>
+              
+                        <tr><td colspan="9" style="padding-top: 12%; padding-left:10%; padding-bottom: 23%;">Result Date:- {{i.resultdate|date:'d-M-Y'}}</td></tr>
+                        </tr>
+                         </table> 
+                       </div>
+
+
+
+                    {% endfor %}             
+                      
+{% else %}
+<h1> You Do Not Have permission to access this page</h1>
+{% endif %}
+ {% else %}
+ <h1> You are not logged in</h1>
+    {% endif %} 
+{% endblock %}
+ {% block mainbody %} {% endblock %}

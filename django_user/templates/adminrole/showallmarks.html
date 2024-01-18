@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Marks{% endblock title %}
+{% block forgot %}  {% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+{% if user.role == "Admin" %}
+<table id="showmarks" class="table-bordered border-danger container-fluid mt-2" align="center">
+      <tr border="1px" align="center" style="background-color:black; color:white;">
+                      <td>Roll Number</td>
+                      <td>Branch</td>
+                      <td>Semester</td>
+                      <td>Subject</td>
+                      <td>Subject Code</td>
+                      <td>Full Marks</td>
+                      <td>Obtain Marks</td>
+                      <td>Pratical FM</td>
+                      <td>Prac Obt Marks</td>
+                      <td>Total Marks</td>
+                      <td>Result</td>
+                      <td>CGPA</td>
+                      <td>Result Date</td>
+                      <td>Action</td>
+                    </tr>
+                      {% for i in marks %}
+                      <tr border="2" align="center" style="background-color:white; margin: 20px; border-radius:black solid 20px;">  
+                        <td>{{i.rollno}}</td>
+                        <td> {{i.branch}}</td>
+                        <td> {{i.semester}}</td>
+                        <td> {{i.subject}}</td>
+                        <td> {{i.subjectcode}}</td>
+                        <td> {{i.fullmark}}</td>
+                        <td> {{i.obtainmark}}</td>
+                        <td> {{i.pracfullmark}}</td>
+                        <td> {{i.pracobtmark}}</td>
+                        <td> {{i.totalmark}}</td>
+                        <td> {{i.result}}</td>
+                        <td> {{i.CGPA}}</td>
+                        <td> {{i.resultdate|date:'d-M-Y'}}</td>
+                        <td> <form action="editmark" method="GET">
+                          {% csrf_token %}
+                          <input type="hidden" name="ids" value="{{i.id}}">
+                    <button class="btn btn-success btn-outline-warning ">Edit</button>
+                   </form></td>
+                      </tr>
+                    {% endfor %}  
+                    </table>               
+{% else %}
+<h1> You Do Not Have permission to access this page</h1>
+{% endif %}
+ {% else %}
+ <h1> You are not logged in</h1>
+    {% endif %}
+               {% endblock %}
+               {% block mainbody %} {% endblock %}

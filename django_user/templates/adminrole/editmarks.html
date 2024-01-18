@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Marks{% endblock title %}
+{% block forgot %}  {% endblock %}
+{% block content %} 
+{% if request.user.is_authenticated %}
+
+{% if user.role == "Admin" %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+        div.scroll {
+            margin: 8px, 8px;
+            padding: 8px;
+            width:auto;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+    </style>
+
+
+ <div class="scroll">
+
+<table id="showmarks" class="table-bordered border-danger container-fluid mt-2" align="center" class="menu">
+       <tr border="1px" align="center" style="background-color:black; color:white;">
+                      <td>Roll No</td>
+                      <td>Branch</td>
+                      <td>Semester</td>
+                      <td>Subject</td>
+                      <td>Subject Code</td>
+                      <td>Full Marks</td>
+                      <td>Obtain Marks</td>
+                      <td>Pratical FM</td>
+                      <td>Prac Obt Marks</td>
+                      <td>Total Marks</td>
+                      <td>Result</td>
+                      <td>CGPA</td>
+                      <td>Result Date</td>
+                      <td>Action</td>
+                    </tr>
+                      {% for i in pdfs %}
+                      <tr border="2" align="center" style="background-color:white; margin: 20px; border-radius:black solid 20px;">
+                        <form action="editmark" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="ids" value="{{i.id}}">
+                        <td><input  disabled type="text" name="rollno" value="{{i.rollno}}"></td>
+                        <td> <input type="text" name="branch" value="{{i.branch}}"></td>
+                        <td> <input type="text" name="semester" value="{{i.semester}}"></td>
+                        <td><input type="text" name="subject" value=" {{i.subject}}"></td>
+                        <td><input type="text" name="subjectcode" value=" {{i.subjectcode}}"></td>
+                        <td> <input type="text" name="fullmark" value="{{i.fullmark}}"></td>
+                        <td> <input type="text" name="obtainmark" value="{{i.obtainmark}}"></td>
+                        <td> <input type="text" name="pracfullmark" value="{{i.pracfullmark}}"></td>
+                        <td> <input type="text" name="pracobtmark" value="{{i.pracobtmark}}"></td>
+                        <td> <input type="text" name="totalmark" value="{{i.totalmark}}"></td>
+                        <td> <input type="text" name="result" value="{{i.result}}"></td>
+                        <td> <input type="text" name="CGPA" value="{{i.CGPA}}"></td>
+                        <td> <input type="date" name="resultdate" value="{{i.resultdate|date:'Y-m-d'}}"></td>
+                        <td> 
+                    <button class="btn btn-success btn-outline-warning">Update</button>
+                   </form></td>
+                      </tr>
+                    {% endfor %}  
+                    </table>    
+                        </div> 
+                        {% else %}
+<h1> You Do Not Have permission to access this page</h1>
+{% endif %}
+ {% else %}
+ <h1> You are not logged in</h1>
+    {% endif %}          
+               {% endblock %}
+               {% block mainbody %} {% endblock %}
