@@ -1,5 +1,3 @@
-django-payments
-razorpay
 tablib
 import_export
 openpyxl
