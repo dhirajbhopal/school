@@ -1,23 +1,24 @@
-python3 -m pip install Django==4.2.7
-python3 -m pip install pytz==2023.3.post1
-python3 -m pip install sqlparse==0.4.4
-python3 -m pip install smtplib error
-python3 -m pip install MIMEMultipart error
-python3 -m pip install random erroe
-python3 -m pip install tablib
-python3 -m pip install rest_framework
-python3 -m pip install import_export
-python3 -m pip install openpyxl
-python3 -m pip install pandas
-python3 -m pip install num2words
-pip3 install pillow
-pip3 install pyqrcode
-pip3 install qrcode 
-python3 -m pip install pytz==2023.3.post1
- 
+django-payments
+razorpay
+tablib
+import_export
+openpyxl
+pandas
+num2words
+pyqrcode
+qrcode 
+pytz==2023.3.post1
+Django==5.0.6
+django-appconf==1.0.6
+django-imagekit==5.0.0
+django-multiselectfield==0.1.13
+gunicorn==23.0.0
+packaging==24.1
+pilkit==3.0
+pillow==10.3.0
+python-dotenv==1.0.1
+<<<<<<< HEAD
+sqlparse==0.5.0
+tzdata==2024.1
+whitenoise==6.7.0
 
-V@idb1IigJ$CM=HdOvu96)ENQ=ZavG4$
-
-ec2-13-233-157-109.ap-south-1.compute.amazonaws.com
-
-Administrator
