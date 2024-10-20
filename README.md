@@ -22,3 +22,12 @@ In this tutorial, we will learn how to create Sign Up or Registration Form in Dj
 4. Run requirements.txt - `pip3 install -r requirements.txt`
 5. Run the Application - `python3 manage.py runserver`
 6. Go to - http://localhost:8000/
+
+# git command
+# hit init
+# git add .
+# git commit -m "first"
+# git push -f -u origin main for pushing on git
+
+
+
