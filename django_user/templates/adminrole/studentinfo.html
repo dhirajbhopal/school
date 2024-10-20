@@ -6,7 +6,8 @@
 {% if request.user.is_authenticated %}
 {% if user.role == "Admin" %}
   
-              <p class="text-center h1 fw-bold mb-1 mx-1 mx-md-1 mt-1 pb-2" style="color:green;">Students Details</p>                
+              <p class="text-center h1 fw-bold mb-1 mx-1 mx-md-1 mt-1 pb-2" style="color:green;">Students Details</p>    
+              <div style="overflow-x:auto;">            
                   <table class="table" style=" border: 2px solid;">
                     <tr style="background-color:black;">
                       <td class="profile">Email ID-</td>
@@ -44,6 +45,7 @@
                     </tr>
                     {% endfor %}           
                   </table>
+                </div>
 {% else %}
 <h1> You Do Not Have permission to access this page</h1>
 {% endif %}
